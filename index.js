@@ -33,9 +33,3 @@ app.get('/api/items/:id',(req,res)=>{
         })
     })
 })
-
-
-
-
-
-
