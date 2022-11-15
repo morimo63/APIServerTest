@@ -24,7 +24,7 @@ app.get('/api/items',(req,res)=>{
 
 // 指定されたidのデータを取得する
 app.get('/api/items/:id',(req,res)=>{
-    const obj = {"id": Number(request.params.id)}
+    const obj = {"id": Number(req.params.id)}
     MongoClient.connect('mongodb://192.168.10.6:27017',(err,db)=>{
         const dbName = db.db(DB)
         dbName.collection(DBCollection).find(obj).toArray(function(error,response){
