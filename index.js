@@ -3,37 +3,39 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient
 
 const DB = 'itemDB'
-const DBCollection ='newItem'
+const DBCollection ='itemCollection'
+
+app.listen(3000)
 
 app.get('/',(req,res) =>{
     res.send('hello express!')
 })
 
-
+// データ全体を取得する
 app.get('/api/items',(req,res)=>{
     MongoClient.connect('mongodb://192.168.10.6:27017',(err,db)=>{
-        if(err) throw err
         const dbName = db.db(DB)
-        dbName.collection(DBCollection).find().toArray(function(err,re){
-            console.log(res)
-            res.json(re)
+        dbName.collection(DBCollection).find().toArray(function(error,response){
+            res.json(response)
             db.close()
         })
     })
 })
 
-
+// 指定されたidのデータを取得する
 app.get('/api/items/:id',(req,res)=>{
-    const obj = {"id": Number(req.params.id)}
-
+    const obj = {"id": Number(request.params.id)}
     MongoClient.connect('mongodb://192.168.10.6:27017',(err,db)=>{
-        if(err) throw err
         const dbName = db.db(DB)
-        dbName.collection(DBCollection).find(obj).toArray(function(err,re){
-            res.send(re)
+        dbName.collection(DBCollection).find(obj).toArray(function(error,response){
+            res.send(response)
             db.close()
         })
     })
 })
 
-app.listen(3000)
+
+
+
+
+
